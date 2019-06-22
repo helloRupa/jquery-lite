@@ -85,6 +85,28 @@ class DOMNodeCollection {
 
     return this;
   }
+
+  children() {
+    let kids = [];
+
+    this.collection.forEach((el) => {
+      kids.push(...el.children);
+    });
+
+    return new DOMNodeCollection(kids);
+  }
+
+  parent() {
+    let parents = [];
+
+    this.collection.forEach((el) => {
+      if (parents.length === 0 || !parents.includes(el.parentElement)) {
+        parents.push(el.parentElement);
+      }
+    });
+
+    return new DOMNodeCollection(parents);
+  }
 }
 
 module.exports = DOMNodeCollection;
