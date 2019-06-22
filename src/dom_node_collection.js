@@ -1,3 +1,5 @@
+const mod = 'fn';
+
 class DOMNodeCollection {
   constructor(arr) {
     this.collection = arr;
@@ -126,6 +128,37 @@ class DOMNodeCollection {
     });
 
     return new DOMNodeCollection(removed);
+  }
+
+  on(event, callback) {
+    const eName = this.eventName(event);
+
+    this.collection.forEach((el) => {
+      const oldHandler = el[eName];
+      el.removeEventListener(event, el[eName]);
+
+      el[eName] = function(e) {
+        if (typeof oldHandler == 'function') {
+          oldHandler(e);
+        }
+        callback(e);
+      };
+
+      el.addEventListener(event, el[eName]);
+    });
+  }
+
+  off(event) {
+    const eName = this.eventName(event);
+
+    this.collection.forEach((el) => {
+      el.removeEventListener(event, el[eName]);
+      el[eName] = null;
+    });
+  }
+
+  eventName(event) {
+    return event + mod;
   }
 }
 
