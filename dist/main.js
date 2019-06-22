@@ -86,14 +86,25 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/dom_node_collection.js":
+/*!************************************!*\
+  !*** ./src/dom_node_collection.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("class DOMNodeCollection {\n  constructor(arr) {\n    this.collection = arr;\n    arr.forEach((el, idx) => {\n      this[idx] = el;\n    });\n  }\n\n  html(str = '') {\n    if (str.length > 0) {\n      this.collection.forEach((el) => {\n        el.innerHTML = str;\n      });\n    } else {\n      return this.collection[0].innerHTML;\n    }\n  }\n\n  empty() {\n    this.collection.forEach((el) => {\n      el.innerHTML = '';\n    });\n  }\n\n  append(...args) {\n    // const exists = this.evaluateElements(args);\n    const collectionEnd = this.collection.length - 1;\n\n    this.collection.forEach((el, outerIdx) => {\n      args.forEach((addition, innerIdx) => {\n        if (typeof addition === 'string') {\n          el.insertAdjacentHTML('beforeend', addition.outerHTML || addition);\n        } else {\n          if (outerIdx !== collectionEnd) {\n            el.append(addition.cloneNode(true));\n          } else {\n            el.append(addition);\n          }\n        }\n      });\n    });\n  }\n\n  evaluateElements(els) {\n    return els.map((el) => {\n      if (typeof el === 'string') {\n        return false;\n      } else {\n        return document.body.contains(el);\n      }\n    });\n  }\n}\n\nmodule.exports = DOMNodeCollection;\n\n//# sourceURL=webpack:///./src/dom_node_collection.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-eval("$l = function (selector) {\n  return [...document.querySelectorAll(selector)];\n};\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("const DOMNodeCollection = __webpack_require__(/*! ./dom_node_collection */ \"./src/dom_node_collection.js\");\n\n$l = function (selector) {\n  if (selector instanceof HTMLElement) {\n    return new DOMNodeCollection([selector]);\n  }\n\n  return new DOMNodeCollection([...document.querySelectorAll(selector)]);\n};\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 
