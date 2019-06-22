@@ -69,6 +69,22 @@ class DOMNodeCollection {
 
     return this;
   }
+
+  addClass(title) {
+    this.collection.forEach((el) => {
+      el.classList.add(title);
+    });
+
+    return this;
+  }
+
+  removeClass(title) {
+    this.collection.forEach((el) => {
+      el.classList.remove(title);
+    });
+
+    return this;
+  }
 }
 
 module.exports = DOMNodeCollection;
