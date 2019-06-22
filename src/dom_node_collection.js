@@ -117,7 +117,16 @@ class DOMNodeCollection {
 
     return new DOMNodeCollection(matches);
   }
-  
+
+  remove() {
+    let removed = [];
+    this.collection.forEach((el) => {
+      removed.push(el);
+      el.remove();
+    });
+
+    return new DOMNodeCollection(removed);
+  }
 }
 
 module.exports = DOMNodeCollection;
