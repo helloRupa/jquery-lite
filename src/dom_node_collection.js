@@ -107,6 +107,17 @@ class DOMNodeCollection {
 
     return new DOMNodeCollection(parents);
   }
+
+  find(selector) {
+    let matches = [];
+
+    this.collection.forEach((el) => {
+      matches.push(...el.querySelectorAll(selector));
+    });
+
+    return new DOMNodeCollection(matches);
+  }
+  
 }
 
 module.exports = DOMNodeCollection;
