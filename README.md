@@ -5,7 +5,7 @@ Vanilla JS, requires webpack for file bundling
 - $l(): global-scoped method for accessing methods. If given a function, waits until DOM is loaded to execute it. Otherwise returns an object of type DOMNodeCollection.
 
 ## $l Class Methods
-- $l.extend(object, [object, ..., object]): Returns a merge of two or more objects without mutating any. If there are matching keys, the last object provided as an argument takes precendence.
+- $l.extend(object, [object, ..., object]): Returns a merge of two or more objects without mutating any. If there are matching keys, the last object provided as an argument takes precedence.
 - $l.ajax(object): Makes an HTTPRequest using the provided options hash. Options include contentType, method, url, success callback, error callback, and data.
 - $l.ajaxPromise(object): Same as above, but returns a promise as opposed to using callbacks.
 
@@ -22,6 +22,6 @@ Wrapping an HTMLElement or collection of elements in jQuery Lite ($l) returns a 
 - parent(): Returns the parent of each element in the collection as a DOMNodeCollection.
 - find(string): Find elements matching the provided selector within the scope of the caller. Returns a DOMNodeCollection.
 - remove(): Removes the selected elements from the DOM and returns them in a DOMNodeCollection.
-- on(string, callback): Adds an event listener for the provided event on the entire DOMNodeCollection.
-- off(string): Removes all callbacks for the entire collection which are bound to the event.
+- on(string, callback): Adds an event listener for the provided event on the entire collection.
+- off(string): Removes all callbacks which are bound to the event for the entire collection.
 
