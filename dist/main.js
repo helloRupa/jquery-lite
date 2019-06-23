@@ -104,7 +104,7 @@ eval("const mod = 'fn';\n\nclass DOMNodeCollection {\n  constructor(arr) {\n    
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const DOMNodeCollection = __webpack_require__(/*! ./dom_node_collection */ \"./src/dom_node_collection.js\");\n\n$l = function (selector) {\n  if (selector instanceof HTMLElement) {\n    return new DOMNodeCollection([selector]);\n  }\n\n  return new DOMNodeCollection([...document.querySelectorAll(selector)]);\n};\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("const DOMNodeCollection = __webpack_require__(/*! ./dom_node_collection */ \"./src/dom_node_collection.js\");\n\n$l = function (selector) {\n  if (typeof selector == 'function') {\n    document.addEventListener('DOMContentLoaded', () => { selector(); });\n    return;\n  }\n\n  if (selector instanceof HTMLElement) {\n    return new DOMNodeCollection([selector]);\n  }\n\n  return new DOMNodeCollection([...document.querySelectorAll(selector)]);\n};\n\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 
