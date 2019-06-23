@@ -12,3 +12,13 @@ $l = function (selector) {
 
   return new DOMNodeCollection([...document.querySelectorAll(selector)]);
 };
+
+$l.extend = function(...args) {
+  let merged = {};
+
+  args.forEach((arg) => {
+    merged = { ...merged, ...arg };
+  });
+
+  return merged;
+}
