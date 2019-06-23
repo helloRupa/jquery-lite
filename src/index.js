@@ -58,3 +58,35 @@ $l.ajax = function(options) {
   xhr.setRequestHeader('Content-type', options.contentType);
   xhr.send(JSON.stringify(options.data));
 }
+
+$l.ajaxPromise = function(options) {
+  const defaults = {
+    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+    method: 'GET',
+    url: '',
+    success: () => {},
+    error: () => {},
+    data: {}
+  };
+  
+  options = $l.extend(defaults, options);
+  options.method = options.method.toUpperCase();
+
+  if (options.method === 'GET') {
+    const queryString = Object.keys(options.data).map((key) => {
+      encodeURIComponent(key) + '=' + encodeURIComponent(options.data[key])
+    }).join('&');
+
+    options.url += queryString;
+  }
+
+  return new Promise((resolve, reject) => {
+    let xhr = new XMLHttpRequest();
+
+    xhr.open(options.method, options.url, true);
+    xhr.onload = resolve;
+    xhr.onerror = reject;
+    xhr.setRequestHeader('Content-type', options.contentType);
+    xhr.send(JSON.stringify(options.data));
+  });
+}
